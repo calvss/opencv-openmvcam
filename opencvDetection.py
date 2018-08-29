@@ -4,6 +4,8 @@ import logging as log
 import datetime as dt
 import time
 import math
+import threading
+import queue
 from captureImage import captureImage
 from statistics import stdev
 from statistics import mean
@@ -22,8 +24,17 @@ anterior = 0
 maxDistance = 30 # max distance a face moves per frame
 
 dataset = []
+imageStream = queue.Queue()
 
-frame = captureImage()
+def imageRead(q):
+    while True:
+        q.put(captureImage())
+
+imageReader = threading.Thread(target=imageRead, args=(imageStream,))
+imageReader.daemon = True
+imageReader.start()
+        
+frame = imageStream.get()
 print(len(frame[0]))
 print(len(frame))
 gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
@@ -41,7 +52,7 @@ while True:
     start_time = time.time()
 
     # Capture frame-by-frame
-    frame = captureImage()
+    frame = imageStream.get()
     
     #frame = cv2.resize(frame, (0,0), fx=0.5, fy=0.5, interpolation=cv2.INTER_AREA)
 
