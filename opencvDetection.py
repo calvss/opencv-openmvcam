@@ -97,7 +97,7 @@ while True:
     # Display the resulting frame
     cv2.imshow('Video', frame)
     
-    print("FPS: ", 1.0/(time.time() - start_time))
+    print("FPS: {:0.1f} imageStream size: {}".format(1.0/(time.time() - start_time),imageStream.qsize()))
 
 pr.disable()
 s = io.StringIO()
