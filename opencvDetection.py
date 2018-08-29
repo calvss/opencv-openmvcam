@@ -26,6 +26,8 @@ maxDistance = 30 # max distance a face moves per frame
 dataset = []
 imageStream = queue.Queue()
 
+pr.enable()
+
 def imageRead(q):
     while True:
         q.put(captureImage())
@@ -47,7 +49,6 @@ for boundingBox in initialFaces:
     
     faceList.append(faceObject(boundingBox, randomColor))
     
-pr.enable()
 while True:
     start_time = time.time()
 
