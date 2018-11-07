@@ -15,7 +15,7 @@ from random import randint
 import cProfile, pstats, io
 pr = cProfile.Profile()
 
-cascPath = "haarcascade_frontalface_default.xml"
+cascPath = "palm.xml"
 faceCascade = cv2.CascadeClassifier(cascPath)
 log.basicConfig(filename='webcam.log',level=log.INFO)
 

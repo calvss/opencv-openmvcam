@@ -13,7 +13,7 @@ from PIL import ImageTk
 # panel = tk.Label(window)
 
 def captureImage():
-    ser = serial.Serial('COM5', 256000, 8, 'N', 1, timeout=1)
+    ser = serial.Serial('COM7', 256000, 8, 'N', 1, timeout=1)
     ser.flushInput()
     
     while(True):
